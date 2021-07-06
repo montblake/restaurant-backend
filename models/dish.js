@@ -15,7 +15,7 @@ const dishSchema = new Schema({
     // dinner menu subdivision
     starter: { type: Boolean, required: false },
     main: { type: Boolean, required: false },
-    largeFormat: { type: Boolean, default: false },
+    largeFormat: { type: Boolean, required: false },
 
     // dietary restrictions
     vegetarian: { type: Boolean, default: false },
