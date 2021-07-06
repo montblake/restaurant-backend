@@ -47,7 +47,7 @@ app.use(express.json());
 // =====================================
 // Test Route
 app.get("/", (req, res) => {
-    res.send("Welcome to your new favorite restaurant!")
+    res.send("Welcome to your new favorite restaurant! Please use the front door.")
 });
 
 // Index Route
