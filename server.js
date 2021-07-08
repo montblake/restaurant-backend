@@ -81,6 +81,7 @@ app.put("/menu/:id", async (req, res) => {
 
 // Create Route
 app.post("/menu", async (req, res) => {
+    console.log(req.body);
     try {
         res.json(await Dish.create(req.body));
     } catch (error) {
