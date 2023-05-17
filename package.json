@@ -8,13 +8,23 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": ["restaurant", "dining", "food", "beverage", "cocktails", "wine", "chicago", "West Loop"],
+  "keywords": [
+    "restaurant",
+    "dining",
+    "food",
+    "beverage",
+    "cocktails",
+    "wine",
+    "chicago",
+    "West Loop"
+  ],
   "author": "Blake Montgomery",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-validator": "^7.0.1",
     "mongoose": "^5.13.0",
     "morgan": "^1.10.0"
   }
