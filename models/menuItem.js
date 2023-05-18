@@ -12,7 +12,7 @@ const menuItemSchema = new Schema({
     price: { type: Number, required: true },
 
     // which menu is the dish on?
-    menu: { type: String, required: true, enum: ['dinner', 'drinks', 'dessert'] },
+    menuType: { type: String, required: true, enum: ['dinner', 'drinks', 'dessert'] },
 
     // what course is the dish listed under?
     course: { type: String, required: true, enum: ['chilled', 'first', 'main', 'wine', 'beer', 'cocktails', 'zero-proof', 'desserts', 'digestifs', 'coffee'] },
