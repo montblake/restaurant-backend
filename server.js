@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
-app.use("/api/v1/menu", apiV1Router);
+app.use("/api/v1", apiV1Router);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

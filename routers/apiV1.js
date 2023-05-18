@@ -4,7 +4,20 @@ const router = express.Router();
 const MenuItem = require("../models/menuItem");
 const { menuItemValidationRules, validate } = require("../validations/menuItemValidation");
 
-router.get("/", async (req, res, next) => {
+router.get("/courses-by-menu-type", async (req, res, next) => {
+  try {
+    const menuTypes = await MenuItem.distinct("menu");
+    const coursesByMenuType = {};
+    for (const menuType of menuTypes) {
+      coursesByMenuType[menuType] = await MenuItem.find({ menu: menuType }).distinct("course");
+    }
+    res.json(coursesByMenuType);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/menu", async (req, res, next) => {
   try {
     res.json(await MenuItem.find({}));
   } catch (error) {
@@ -12,7 +25,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/menu/:id", async (req, res, next) => {
   try {
     const deletedItem = await MenuItem.findByIdAndDelete(req.params.id);
     if (!deletedItem) return res.status(404).json({ error: "Item not found" });
@@ -22,7 +35,7 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id", menuItemValidationRules(), validate, async (req, res, next) => {
+router.put("/menu/:id", menuItemValidationRules(), validate, async (req, res, next) => {
   try {
     const updatedItem = await MenuItem.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedItem) return res.status(404).json({ error: "Item not found" });
@@ -32,7 +45,7 @@ router.put("/:id", menuItemValidationRules(), validate, async (req, res, next) =
   }
 });
 
-router.post("/", menuItemValidationRules(), validate, async (req, res, next) => {
+router.post("/menu", menuItemValidationRules(), validate, async (req, res, next) => {
   try {
     const newItem = await MenuItem.create(req.body);
     res.status(201).json(newItem);
@@ -41,7 +54,7 @@ router.post("/", menuItemValidationRules(), validate, async (req, res, next) => 
   }
 });
 
-router.get("/:id", async (req,res, next) => {
+router.get("/menu/:id", async (req,res, next) => {
   try {
     const item = await MenuItem.findById(req.params.id);
     if (!item) return res.status(404).json({ error: "Item not found" });
