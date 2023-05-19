@@ -6,7 +6,7 @@ const menuItemValidationRules = () => {
     body('name').isString().withMessage('Name must be a string'),
     body('description').isString().withMessage('Description must be a string'),
     body('price').isNumeric().withMessage('Price must be a number'),
-    body('menu').isIn(['dinner', 'drinks', 'dessert']).withMessage('Menu must be one of: dinner, drinks, dessert'),
+    body('menuType').isIn(['dinner', 'drinks', 'dessert']).withMessage('Menu must be one of: dinner, drinks, dessert'),
     body('course').isString().withMessage('Course must be a string'),
     body('course').custom((value, { req }) => {
       const coursesByMenu = {
@@ -15,11 +15,11 @@ const menuItemValidationRules = () => {
         dessert: ["desserts", "digestifs", "coffee"]
       };
       // make sure the menu field is validated before the course field
-      if (!req.body.menu) {
+      if (!req.body.menuType) {
         throw new Error('Menu field must be validated first');
       }
-      if (!coursesByMenu[req.body.menu].includes(value)) {
-        throw new Error(`Course must be one of the following: ${coursesByMenu[req.body.menu].join(", ")}`);
+      if (!coursesByMenu[req.body.menuType].includes(value)) {
+        throw new Error(`Course must be one of the following: ${coursesByMenu[req.body.menuType].join(", ")}`);
       }
       return true;
     }),

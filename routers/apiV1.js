@@ -4,12 +4,12 @@ const router = express.Router();
 const MenuItem = require("../models/menuItem");
 const { menuItemValidationRules, validate } = require("../validations/menuItemValidation");
 
-router.get("/courses-by-menu-type", async (req, res, next) => {
+router.get("/courses-by-menu", async (req, res, next) => {
   try {
-    const menuTypes = await MenuItem.distinct("menu");
+    const menuTypes = await MenuItem.distinct("menuType");
     const coursesByMenuType = {};
     for (const menuType of menuTypes) {
-      coursesByMenuType[menuType] = await MenuItem.find({ menu: menuType }).distinct("course");
+      coursesByMenuType[menuType] = await MenuItem.find({ menuType: menuType }).distinct("course");
     }
     res.json(coursesByMenuType);
   } catch (error) {
