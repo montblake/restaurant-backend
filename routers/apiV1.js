@@ -4,6 +4,9 @@ const router = express.Router();
 const MenuItem = require("../models/menuItem");
 const { menuItemValidationRules, validate } = require("../validations/menuItemValidation");
 
+// by gatherign courses by menu programmaticaly, we can ensure info is up-to-date
+// downside: we lost control over specific order of courses on menu
+// TODO: add a field to MenuItem model to allow for manual ordering of courses
 router.get("/courses-by-menu", async (req, res, next) => {
   try {
     const menuTypes = await MenuItem.distinct("menuType");

@@ -1,3 +1,4 @@
+// /models/menuItem.js
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -11,11 +12,12 @@ const menuItemSchema = new Schema({
     // price of the dish as it appears on the menu
     price: { type: Number, required: true },
 
+    // THIS HAS BEEN REMOVED AS COURSE IS WHAT DETERMINES THE MENU TYPE
     // which menu is the dish on?
-    menuType: { type: String, required: true, enum: ['dinner', 'drinks', 'dessert'] },
+    // menuType: { type: Schema.Types.ObjectId, ref: "MenuType", required: true },
 
     // what course is the dish listed under?
-    course: { type: String, required: true, enum: ['chilled', 'first', 'main', 'wine', 'beer', 'cocktails', 'zero-proof', 'desserts', 'digestifs', 'coffee'] },
+    course: { type: Schema.Types.ObjectId, ref: "Course", required: true },
 
     // is the dish currently on the menu?
     current: { type: Boolean, required: true },
@@ -25,6 +27,10 @@ const menuItemSchema = new Schema({
     
     // how is it prepared? details about the dish provided by the kitchen
     method: { type: String, required: false },
+
+    // what position in the menu (for that course) is the dish listed?
+    position: { type: Number, default: null },
+
 },  {
         timestamps: true
     }
