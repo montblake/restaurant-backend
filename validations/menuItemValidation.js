@@ -1,5 +1,6 @@
 // validations/menuItemValidation.js
 const { body, validationResult } = require("express-validator");
+const Course = require("../models/course");
 
 const menuItemValidationRules = () => {
   return [
@@ -46,24 +47,22 @@ const menuItemValidationRules = () => {
       .withMessage('Menu type must be one of: dinner, drinks, dessert'),
 
     body('course')
-      .notEmpty()
-      .withMessage('Course is required')
-      .isString()
-      .withMessage('Course must be a string')
-      .custom((value, { req }) => {
-        const coursesByMenu = {
-          dinner: ["first", "chilled", "main"],
-          drinks: ["beer", "wine", "cocktails", "zero-proof"],
-          dessert: ["desserts", "digestifs", "coffee"]
-        };
-        if (!req.body.menuType) {
-          throw new Error('Menu type must be validated first');
-        }
-        if (!coursesByMenu[req.body.menuType].includes(value)) {
-          throw new Error(`Course must be one of the following: ${coursesByMenu[req.body.menuType].join(", ")}`);
-        }
-        return true;
-      }),
+    .notEmpty()
+    .withMessage('Course is required')
+    .isString()
+    .withMessage('Course must be a string')
+    .exists()
+    .custom(async (value) => {
+      const course = await Course.findById(value);
+      if (!course) {
+        return Promise.reject('Course does not exist');
+      }
+    }),
+
+    body('position')
+    .optional()
+    .isInt()
+    .withMessage('Position must be an integer'),
   ];
 };
 
