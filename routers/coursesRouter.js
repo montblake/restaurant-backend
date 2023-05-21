@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Course = require("../models/course");
+const { courseValidationRules, validate} = require("../validations/courseValidation");
 
 router.get("/", async (req, res, next) => {
   try {

@@ -4,7 +4,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
-const apiV1Router = require("./routers/menuItemsRouter");
+const menuTypesRouter = require("./routers/menuTypesRouter");
+const coursesRouter = require("./routers/coursesRouter");
+const menuItemsRouter = require("./routers/menuItemsRouter");
 require("./database");
 
 const app = express();

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const MenuType = require("../models/menuType");
+const { menuTypeValidationRules, validate} = require("../validations/menuTypeValidation");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -41,4 +42,12 @@ router.post("/", menuTypeValidationRules(), validate, async (req, res, next) => 
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const
+    const menuType = await MenuType.findById(req.params.id);
+    if (!menuType) return res.status(404).json({ error: "Menu type not found" });
+    res.json(item);
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
