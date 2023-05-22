@@ -40,12 +40,6 @@ const menuItemValidationRules = () => {
       .isString()
       .withMessage('Method must be a string'),
 
-    body('menuType')
-      .notEmpty()
-      .withMessage('Menu type is required')
-      .isIn(['dinner', 'drinks', 'dessert'])
-      .withMessage('Menu type must be one of: dinner, drinks, dessert'),
-
     body('course')
     .notEmpty()
     .withMessage('Course is required')
