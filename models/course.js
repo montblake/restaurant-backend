@@ -11,8 +11,6 @@ const courseSchema = new Schema({
   position: { type: Number, default: null },
   // is the course currently on the menu?
   current: { type: Boolean, required: true },
-  // what menuItems are in the course?
-  menuItems: [{ type: Schema.Types.ObjectId, ref: "MenuItem" }],
 },  {
       timestamps: true
 });

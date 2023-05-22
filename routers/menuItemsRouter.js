@@ -7,24 +7,23 @@ const { menuItemValidationRules, validate } = require("../validations/menuItemVa
 // by gatherign courses by menu programmaticaly, we can ensure info is up-to-date
 // downside: we lost control over specific order of courses on menu
 // TODO: add a field to MenuItem model to allow for manual ordering of courses
-router.get("/courses-by-menu", async (req, res, next) => {
-  try {
-    const menuTypes = await MenuItem.distinct("menuType");
-    const coursesByMenuType = {};
-    for (const menuType of menuTypes) {
-      coursesByMenuType[menuType] = await MenuItem.find({ menuType: menuType }).distinct("course");
-    }
-    res.json(coursesByMenuType);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.get("/courses-by-menu", async (req, res, next) => {
+//   try {
+//     const menuTypes = await MenuItem.distinct("menuType");
+//     const coursesByMenuType = {};
+//     for (const menuType of menuTypes) {
+//       coursesByMenuType[menuType] = await MenuItem.find({ menuType: menuType }).distinct("course");
+//     }
+//     res.json(coursesByMenuType);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.get("/", async (req, res, next) => {
   try {
     const courseId = req.query.course;
     const query = courseId ? { course: courseId } : {};
-    console.log(query);
     res.json(await MenuItem.find(query).populate("course"));
   } catch (error) {
     next(error);

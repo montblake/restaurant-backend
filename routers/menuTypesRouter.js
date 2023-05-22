@@ -5,10 +5,7 @@ const { menuTypeValidationRules, validate} = require("../validations/menuTypeVal
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(
-      await MenuType
-      .find({})
-      .populate("courses"));
+    res.json(await MenuType.find({}));
   } catch (error) {
     next(error);
   }
