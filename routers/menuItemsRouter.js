@@ -22,7 +22,10 @@ router.get("/courses-by-menu", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await MenuItem.find({}));
+    const courseId = req.query.course;
+    const query = courseId ? { course: courseId } : {};
+    console.log(query);
+    res.json(await MenuItem.find(query).populate("course"));
   } catch (error) {
     next(error);
   }
