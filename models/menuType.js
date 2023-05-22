@@ -9,6 +9,8 @@ const menuTypeSchema = new Schema({
   position: { type: Number, default: null },
   // is the menuType currently on the menu?
   current: { type: Boolean, required: true },
+  // the courses that belong to the menuType
+  courses: [{ type: Schema.Types.ObjectId, ref: "Course" }]
 },  {
       timestamps: true
 });

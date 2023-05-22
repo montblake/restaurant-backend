@@ -16,7 +16,7 @@ const menuItemSchema = new Schema({
     // which menu is the dish on?
     // menuType: { type: Schema.Types.ObjectId, ref: "MenuType", required: true },
 
-    // what course is the dish listed under?
+    // what course does the dish belong to?
     course: { type: Schema.Types.ObjectId, ref: "Course", required: true },
 
     // is the dish currently on the menu?
