@@ -1,8 +1,8 @@
 // /seeds/seed-menu-type.js
 const mongoose = require("mongoose");
-const MenuType = require("../models/menuType");
-const Course = require("../models/course");
-const MenuItem = require("../models/menuItem");
+const MenuType = require("./models/menuType");
+const Course = require("./models/course");
+const MenuItem = require("./models/menuItem");
 require('dotenv').config();
 
 // ENVIRONMENT VARIABLES
